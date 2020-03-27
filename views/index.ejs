@@ -1,12 +1,33 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+  <% include _header%>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p>Esta bista es de la página principal</p>
-  </body>
-</html>
+    <p>Welcome to 
+      <%= title %>
+    </p>
+    <h2>Lista de zombies</h2>
+    <table class="table table-striped table-dark text-center">
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Tipo</th>
+        <th>Acciones</th>
+      </tr>
+      <% 
+        if(coleccion){
+          coleccion.forEach(function(zombie){
+      %>
+        <tr>
+          <td><%= zombie.name %></td>
+          <td><%= zombie.email %></td>
+          <td><%= zombie.type %></td>
+          <td>
+            <a href="/zombies/edit/<%= zombie.id %>">  <i class="fas fa-edit" title="Editar"></i></a>
+            <a href="/zombies/delete/<%= zombie.id %>"><i class="fas fa-trash" title="Eliminar"></i></a>
+          </td>
+        </tr>
+      <%
+          });
+        }
+      %>
+    </table>
+    
+<% include _footer%>
